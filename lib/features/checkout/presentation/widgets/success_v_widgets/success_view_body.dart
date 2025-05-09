@@ -67,6 +67,15 @@ class SuccessViewBody extends StatelessWidget {
                       ),
                     ),
                     Positioned(
+                      bottom: MediaQuery.of(context).size.height * 0.15,
+                      right: -17.0,
+                      child: const CircleAvatar(
+                        backgroundColor: AppColors.white,
+                        radius: 17.0,
+                      ),
+                    ),
+                    //-- Dashed line
+                    Positioned(
                       bottom: MediaQuery.of(context).size.height * 0.15 + 17,
                       right: 20,
                       left: 20,
@@ -85,14 +94,6 @@ class SuccessViewBody extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: MediaQuery.of(context).size.height * 0.15,
-                      right: -17.0,
-                      child: const CircleAvatar(
-                        backgroundColor: AppColors.white,
-                        radius: 17.0,
                       ),
                     ),
                   ],

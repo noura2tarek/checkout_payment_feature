@@ -76,7 +76,7 @@ class ThankYouCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 15.0),
             child: TotalRow(text1: 'Total', text2: '50.97'),
           ),
-          //--- white contanier ---//
+          //--- White container ---//
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15.0),
             child: Container(

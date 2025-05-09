@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'payment_item.dart';
+import 'payment_method_item.dart';
 
 class PaymentMethodsList extends StatefulWidget {
   const PaymentMethodsList({
