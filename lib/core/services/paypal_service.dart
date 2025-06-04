@@ -45,6 +45,8 @@ class PayPalService {
         note: "Contact us for any questions on your order.",
         onSuccess: (Map params) async {
           print("onSuccess: $params");
+          // Note: use personal default account to test
+          Navigator.pop(context);
         },
         onError: (error) {
           print("onError: $error");
