@@ -7,17 +7,16 @@ import '../api_keys.dart';
 
 // publishableKey global variable
 // put it in.env and .gitignore
+Dio _dio = Dio();
 
 //---- Stripe Service class -----//
 class StripeService {
-  Dio _dio = Dio();
-
   // 1- (Payment Intent object) create payment intent (amount:int, currency:usd)
   // 2- initialize payment sheet (client secret)
   // 3- present payment sheet
 
   //--- create payment intent method
-  Future<PaymentIntentObject?> createPaymentIntent(
+  static Future<PaymentIntentObject?> createPaymentIntent(
       {required PaymentIntentInputModel inputModel}) async {
     try {
       // Map<String, dynamic> body = {
@@ -26,11 +25,11 @@ class StripeService {
       // };
       // we can put those lines in api service
       final response = await _dio.post(
-        '$createPaymentIntentUrl',
+        '${ApiKeys.createPaymentIntentUrl}',
         options: Options(
           contentType: 'application/x-www-form-urlencoded',
           headers: {
-            'Authorization': 'Bearer $secretKey',
+            'Authorization': 'Bearer ${ApiKeys.stripeSecretKey}',
           },
         ),
         data: inputModel.toMap(),
@@ -45,7 +44,8 @@ class StripeService {
   }
 
   // init payment sheet
-  Future<void> initPaymentSheet({required PaymentIntentObject data}) async {
+  static Future<void> initPaymentSheet(
+      {required PaymentIntentObject data}) async {
     try {
       // initialize the payment sheet
       await Stripe.instance.initPaymentSheet(
@@ -75,7 +75,7 @@ class StripeService {
   }
 
   // Show payment sheet
-  Future<void> presentPaymentSheet() async {
+  static Future<void> presentPaymentSheet() async {
     try {
       await Stripe.instance.presentPaymentSheet();
     } catch (e) {

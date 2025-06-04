@@ -1,3 +1,4 @@
+import 'package:checkout_payment/core/services/paypal_service.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/app_images/app_images.dart';
 import '../custom_button.dart';
@@ -26,8 +27,11 @@ class ModalBottomSheetBody extends StatelessWidget {
             height: 20.0,
           ),
           CustomButton(
-            buttonText: 'Pay',
-            onPressed: () {},
+            buttonText: 'Continue',
+            onPressed: () {
+              // test paypal
+              PayPalService.checkoutUsingPayPal(context);
+            },
           ),
         ],
       ),
