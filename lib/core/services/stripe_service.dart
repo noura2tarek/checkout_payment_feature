@@ -38,7 +38,7 @@ class StripeService {
           PaymentIntentObject.fromJson(response.data);
       return paymentIntent;
     } catch (e) {
-      print(e.toString());
+      print('Error while create Payment Intent: ${e.toString()}');
     }
     return null;
   }
@@ -69,7 +69,7 @@ class StripeService {
       // ScaffoldMessenger.of(context).showSnackBar(
       //   SnackBar(content: Text('Error: $e')),
       // );
-      print('Error: ${e.toString()}');
+      print('Error while init Payment Sheet: ${e.toString()}');
       rethrow;
     }
   }
@@ -88,7 +88,7 @@ class StripeService {
   }
 
   // checkout payment
-  Future<void> checkoutPayment(
+  static Future<void> checkoutPayment(
       {required PaymentIntentInputModel inputModel}) async {
     // create payment intent
     PaymentIntentObject? paymentIntent =

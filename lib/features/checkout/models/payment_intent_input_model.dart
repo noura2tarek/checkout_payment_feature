@@ -1,5 +1,5 @@
 class PaymentIntentInputModel {
-  final String? amount;
+  final int? amount;
   final String? currency;
 
   PaymentIntentInputModel({
@@ -9,7 +9,7 @@ class PaymentIntentInputModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'amount': amount,
+      'amount': '${amount}00', // multiply by 100 because paypal divide by 10
       'currency': currency,
     };
   }

@@ -1,6 +1,7 @@
-import 'package:checkout_payment/core/services/paypal_service.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/app_images/app_images.dart';
+import '../../../../../core/services/stripe_service.dart';
+import '../../../models/payment_intent_input_model.dart';
 import '../custom_button.dart';
 import '../payment_details_widgets/payment_methods_list.dart';
 
@@ -30,7 +31,14 @@ class ModalBottomSheetBody extends StatelessWidget {
             buttonText: 'Continue',
             onPressed: () {
               // test paypal
-              PayPalService.checkoutUsingPayPal(context);
+              //PayPalService.checkoutUsingPayPal(context);
+              // test stripe
+              StripeService.checkoutPayment(
+                inputModel:  PaymentIntentInputModel(
+                  amount: 100,
+                  currency: 'USD',
+                ),
+              );
             },
           ),
         ],
