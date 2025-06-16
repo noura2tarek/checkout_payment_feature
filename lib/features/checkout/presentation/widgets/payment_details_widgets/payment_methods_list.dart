@@ -5,15 +5,19 @@ class PaymentMethodsList extends StatefulWidget {
   const PaymentMethodsList({
     super.key,
     required this.images,
+    required this.updatePaymentMethod,
   });
+
   final List<String> images;
+  final Function({required int index}) updatePaymentMethod;
 
   @override
   State<PaymentMethodsList> createState() => _PaymentMethodsListState();
 }
 
 class _PaymentMethodsListState extends State<PaymentMethodsList> {
-  bool isGatewayActive = true;
+  int activeIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -27,13 +31,14 @@ class _PaymentMethodsListState extends State<PaymentMethodsList> {
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: GestureDetector(
               onTap: () {
-                 isGatewayActive = !isGatewayActive;
-                  setState(() {});
+                activeIndex = index;
+                setState(() {});
+                widget.updatePaymentMethod(index: activeIndex);
               },
               child: PaymentMethodItem(
                 image: widget.images[index],
-                isActive: index == 0? isGatewayActive : !isGatewayActive,
-            ),
+                isActive: activeIndex == index,
+              ),
             ),
           );
         },

@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import '../../features/checkout/models/payment_intent_input_model.dart';
-import '../../features/checkout/models/payment_intent_object.dart';
+import '../../features/checkout/data/models/payment_intent_input_model.dart';
+import '../../features/checkout/data/models/payment_intent_object.dart';
 import '../api_keys.dart';
 
 // publishableKey global variable

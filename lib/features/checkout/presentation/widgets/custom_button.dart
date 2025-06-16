@@ -7,10 +7,13 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.buttonText,
     required this.onPressed,
+    this.isLoading = false,
   });
 
   final String buttonText;
   final void Function()? onPressed;
+  final bool isLoading;
+
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
@@ -21,10 +24,15 @@ class CustomButton extends StatelessWidget {
       ),
       color: AppColors.green,
       onPressed: onPressed,
-      child: Text(
-        buttonText,
-        style: AppStyles.styleMedium20,
-      ),
+      child: isLoading
+          ? Center(
+              child: const CircularProgressIndicator(
+              color: AppColors.white,
+            ))
+          : Text(
+              buttonText,
+              style: AppStyles.styleMedium20,
+            ),
     );
   }
 }

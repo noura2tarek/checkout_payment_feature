@@ -1,6 +1,9 @@
+import 'package:checkout_payment/features/checkout/cubits/payment_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/app_images/app_images.dart';
 import '../../../../../core/colors/colors.dart';
+import '../../../data/repo/checkout_repo.dart';
 import '../custom_button.dart';
 import '../order_info_row.dart';
 import '../total_row.dart';
@@ -58,7 +61,10 @@ class MyCartViewBody extends StatelessWidget {
                 showModalBottomSheet(
                   context: context,
                   builder: (context) {
-                    return ModalBottomSheetBody();
+                    return BlocProvider<PaymentCubit>(
+                      create: (context) => PaymentCubit(CheckOutRepoImpl()),
+                      child: ModalBottomSheetBody(),
+                    );
                   },
                 );
               }),

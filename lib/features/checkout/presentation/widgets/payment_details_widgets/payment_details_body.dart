@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../../../core/app_images/app_images.dart';
 import '../custom_button.dart';
 import 'custom_credit_card.dart';
-import 'payment_methods_list.dart';
 
 class PaymentDetailsBody extends StatefulWidget {
   const PaymentDetailsBody({super.key});
@@ -21,12 +19,16 @@ class _PaymentDetailsBodyState extends State<PaymentDetailsBody> {
       slivers: [
         const SliverToBoxAdapter(child: SizedBox(height: 10)),
         //--- Payment methods List ---//
-        const SliverToBoxAdapter(
-          child: PaymentMethodsList(images: [
-            Assets.imagesGatewayPhoto,
-            Assets.imagesPaypalPhoto,
-          ]),
-        ),
+        // SliverToBoxAdapter(
+        //   child: PaymentMethodsList(
+        //     images: const [
+        //       Assets.imagesGatewayPhoto,
+        //       Assets.imagesPaypalPhoto,
+        //     ],
+        //     updatePaymentMethod: (index) {
+        //       setState(() { });,
+        //   ),
+        // ),
         // Custom credit card
         // Custom form
         SliverToBoxAdapter(
