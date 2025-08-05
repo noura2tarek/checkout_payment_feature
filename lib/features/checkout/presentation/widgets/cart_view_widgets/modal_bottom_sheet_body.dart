@@ -1,11 +1,13 @@
+import 'package:checkout_payment/features/checkout/data/models/customer_input_model.dart';
+import 'package:checkout_payment/features/checkout/data/models/customer_object_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/app_images/app_images.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/services/paypal_service.dart';
 import '../../../cubits/payment_cubit.dart';
-import '../../../data/models/amount_model.dart';
-import '../../../data/models/item_model.dart';
+import '../../../data/models/paypal_models/amount_model.dart';
+import '../../../data/models/paypal_models/item_model.dart';
 import '../../../data/models/payment_intent_input_model.dart';
 import '../custom_button.dart';
 import '../payment_details_widgets/payment_methods_list.dart';
@@ -62,6 +64,7 @@ class _ModalBottomSheetBodyState extends State<ModalBottomSheetBody> {
                   }
                   return false;
                 });
+                // If an error happens
               } else if (state is PaymentError) {
                 // will happen if credentials are wrong
                 // or the user cancel bottom sheet
@@ -72,10 +75,11 @@ class _ModalBottomSheetBodyState extends State<ModalBottomSheetBody> {
               }
             },
             builder: (context, state) {
+              // Continue button
               return CustomButton(
                 isLoading: state is PaymentLoading,
                 buttonText: 'Continue',
-                onPressed: () {
+                onPressed: () async {
                   // amount data
                   AmountModel amountModel = AmountModel(
                       total: '100',
@@ -99,15 +103,32 @@ class _ModalBottomSheetBodyState extends State<ModalBottomSheetBody> {
                         transactions:
                             getTransactions(items: items, amount: amountModel));
                   } else {
-                    // test stripe
-                    PaymentIntentInputModel inputModel =
+                    //----- test stripe ---
+                    //-- Customer input
+                    CustomerInputModel customerInputModel = CustomerInputModel(
+                      name: 'Ahmed',
+                      email: 'ah33@example.com',
+                      phone: '0123456789',
+                    );
+                    // 1- create customer object once then cache id securely
+                    // check first if customer object is cached or not, if not
+                    // make this request
+                    CustomerObjectResponse? customerObject =
+                        await BlocProvider.of<PaymentCubit>(context)
+                            .createCustomer(
+                      inputModel: customerInputModel,
+                    );
+                    PaymentIntentInputModel paymentInputModel =
                         PaymentIntentInputModel(
                       amount: 100,
                       currency: 'USD',
+                      // i take it from test in post man we will change it
+                      //'cus_SnmxKhz2f0NYlG'
+                      customerId: customerObject?.id ?? '',
                     );
-                    // call stripe payment from cubit
+                    //2-  call stripe payment from cubit
                     BlocProvider.of<PaymentCubit>(context)
-                        .stripePayment(inputModel: inputModel);
+                        .stripePayment(inputModel: paymentInputModel);
                   }
                 },
               );

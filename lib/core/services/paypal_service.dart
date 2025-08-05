@@ -11,7 +11,7 @@ class PayPalService {
       builder: (BuildContext context) => PaypalCheckoutView(
         sandboxMode: true,
         clientId: ApiKeys.paypalClientId,
-        //from dashboard account
+        // from dashboard account
         secretKey: ApiKeys.paypalSecret,
         transactions: transactions,
         note: "Contact us for any questions on your order.",

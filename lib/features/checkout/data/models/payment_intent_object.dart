@@ -1,3 +1,4 @@
+// thia object is the response of the create payment intent api method
 class PaymentIntentObject {
   String? id;
   String? object;
